@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
+    sparse: true,
     minlength: [5, "Email must be at least 5 characters long"],
   },
   profilePhoto: {
@@ -25,6 +26,7 @@ const userSchema = new mongoose.Schema({
       /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/,
       "Please enter a valid image URL",
     ],
+    default: null,
   },
   password: {
     type: String,
