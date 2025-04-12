@@ -44,6 +44,10 @@ const userSchema = new mongoose.Schema({
   socketId: {
     type: String,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 userSchema.methods.generateAuthToken = function () {
