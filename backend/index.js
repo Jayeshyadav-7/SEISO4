@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const connectToDb = require("./config/db");
 const userRoute = require("./routes/user.route");
+const wasteRoute = require("./routes/waste.route");
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/users", userRoute);
+app.use("/waste", wasteRoute);
 
 // Start the server
 app.listen(PORT, () => {

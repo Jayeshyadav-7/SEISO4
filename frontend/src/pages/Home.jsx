@@ -198,7 +198,7 @@ function Home() {
           <p className="text-2xl leading-6 font-bold relative z-10 mt-5 font-montserrat">
             Get your reward
           </p>
-          <Button text="Submit ID" to="/submit-waste-id" className="btnScale" />
+          <Button text="Submit ID" to="/submitwasteid" className="btnScale" />
         </div>
 
         {/* scroling text  */}
