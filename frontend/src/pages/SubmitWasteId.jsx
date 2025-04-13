@@ -13,36 +13,53 @@ function SubmitWasteId() {
   const { user } = useContext(UserDataContext);
   const navigate = useNavigate();
 
+  if (!user || !user._id) {
+    toast.error("User not authenticated. Please log in.");
+    return;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!wasteId.trim()) {
+      toast.error("Waste ID cannot be empty.");
+      return;
+    }
+
     try {
+      const token = localStorage.getItem("token"); // Assuming the token is stored in localStorage
+      console.log("Request Payload:", { wasteId, userId: user._id }); // Debugging log
+
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/waste/verifywaste`,
-        { wasteId },
-        { userId: user._id },
-        { withCredentials: true }
+        { wasteId, userId: user._id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Add the token here
+          },
+        }
       );
 
-      // Check for successful response
+      console.log("Response Data:", response.data); // Debugging log
+
       if (response.status === 200) {
         toast.success("Waste ID verified successfully!");
-        console.log(response.data);
         navigate("/dashboard");
       }
-
-      if (response.status === 400) {
-        alert("Invalid waste ID");
-        console.log(response.data);
-      }
     } catch (error) {
-      // Handle errors
-      const errorMessage =
-        error.response?.data?.error || "An error occurred. Please try again.";
-      toast.error(errorMessage);
+      if (error.response?.status === 400) {
+        // Handle 400 errors gracefully
+        const errorMessage =
+          error.response?.data?.message || "Invalid waste ID.";
+        toast.error(errorMessage); // Show error as a toast notification
+      } else {
+        const errorMessage =
+          error.response?.data?.error || "An error occurred. Please try again.";
+        console.error("Error Response:", error.response); // Debugging log
+        toast.error(errorMessage);
+      }
     }
   };
-
   return (
     <div className="">
       {/* Background Image */}
@@ -69,6 +86,7 @@ function SubmitWasteId() {
                   <input
                     type="text"
                     id="wasteid"
+                    name="wasteId"
                     value={wasteId}
                     onChange={(e) => setWasteId(e.target.value)}
                     placeholder="Enter Waste ID"

@@ -1,4 +1,4 @@
-const wasteModel = require("../models/waste.model");
+const wasteModel = require("../models/waste.model"); // Ensure this path is correct
 const { validationResult } = require("express-validator");
 const User = require("../models/user.model");
 
@@ -8,10 +8,11 @@ module.exports.listWaste = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { wasteId, wasteWeight } = req.body;
+  const { wasteId, wasteWeight, userId } = req.body; // Added userId to destructuring
 
   // Validate input
   if (!wasteId || !userId) {
+    // Fix typo: 'userId' was not defined
     return res
       .status(400)
       .json({ success: false, message: "Waste ID and User ID are required" });
@@ -62,7 +63,7 @@ module.exports.wasteIdValidater = async (req, res, next) => {
     }
 
     // Check if the waste ID has already been verified
-    if (waste.verified) {
+    if (waste.status === "verified") {
       console.log("Waste ID already used");
       return res
         .status(400)

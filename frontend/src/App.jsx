@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SubmitWasteId from "./pages/SubmitWasteId";
+import { ToastContainer } from "react-toastify";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -34,8 +36,11 @@ function App() {
             </UserProtectedWrapper>
           }
         />
+        <Route path="/about" element={<AboutUs />} />
+        {/* <Route path="/leaderboard" element={<Leaderboard />} /> */}
       </Routes>
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }

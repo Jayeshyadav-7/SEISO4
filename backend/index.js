@@ -5,11 +5,16 @@ const connectToDb = require("./config/db");
 const userRoute = require("./routes/user.route");
 const wasteRoute = require("./routes/waste.route");
 const cookieParser = require("cookie-parser");
+const Waste = require("./models/waste.model");
+const { saveDummyData } = require("./models/waste.model");
 
 const app = express();
 
 // Connect to the database
 connectToDb();
+
+// Save dummy data
+// saveDummyData();
 
 app.get("/", (req, res) => {
   res.send("hello jayesh");

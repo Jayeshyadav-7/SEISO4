@@ -19,13 +19,12 @@ const Navbar = ({ start }) => {
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/about", label: "About Us" },
-    { to: "/submit-waste-id", label: "Submit ID" },
+    { to: "/submitwasteid", label: "Submit ID" },
     { to: "/requestpickup", label: "Request Pickup" },
     { to: "/leaderboard", label: "Leaderboard" },
     // { to: "/contactus", label: "Contact Us" },
     // { to: "/seisostore", label: "Store" },
     // { to: `/dashboard/${userId}`, label: "Dashboard" },
-    { to: "/virtualbin", label: "Virtual Bin" },
   ];
 
   // GSAP Scroll Animation
