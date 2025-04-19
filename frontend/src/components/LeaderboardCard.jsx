@@ -1,6 +1,6 @@
 import propTypes from "prop-types";
-import femaleAvatar from "../assets/femaleAvatar.jpg";
-import maleAvatar from "../assets/maleAvatar.jpg";
+import femaleAvatar from "../assets/femaleavatar.jpg";
+import maleAvatar from "../assets/maleavatar.jpg";
 
 const LeaderboardCard = ({
   profilepicture,
