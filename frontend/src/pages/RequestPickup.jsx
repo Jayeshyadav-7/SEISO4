@@ -63,7 +63,7 @@ function RequestPickup() {
         </div>
 
         <div className="bg-[rgba(0,0,0,0.7)] px-5 xl:px-16">
-          <div className="flex justify-center items-center min-h-screen bg-transparent">
+          <div className="flex justify-center items-center min-h-[60vh] bg-transparent">
             <div className="w-full max-w-3xl bg-transparent">
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* First Row: Full Name, Phone, Email */}

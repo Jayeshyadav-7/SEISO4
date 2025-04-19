@@ -11,6 +11,8 @@ import Footer from "./components/Footer";
 import SubmitWasteId from "./pages/SubmitWasteId";
 import { ToastContainer } from "react-toastify";
 import AboutUs from "./pages/AboutUs";
+import RequestPickup from "./pages/RequestPickup";
+import LeaderBoard from "./pages/LeaderBoard";
 
 function App() {
   return (
@@ -37,7 +39,15 @@ function App() {
           }
         />
         <Route path="/about" element={<AboutUs />} />
-        {/* <Route path="/leaderboard" element={<Leaderboard />} /> */}
+        <Route
+          path="/requestpickup"
+          element={
+            <UserProtectedWrapper>
+              <RequestPickup />
+            </UserProtectedWrapper>
+          }
+        />
+        <Route path="/leaderboard" element={<LeaderBoard />} />
       </Routes>
       <Footer />
       <ToastContainer position="top-right" autoClose={3000} />

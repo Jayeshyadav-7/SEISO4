@@ -76,12 +76,27 @@ router.get("/topcontributers", async (req, res) => {
   try {
     const topUsers = await User.find()
       .sort({ totalWasteCollected: -1 }) // Sort by totalWasteCollected in descending order
-      .limit(5) // Limit the result to the top 5 users
+      .limit(5)
       .select(
         "name phoneNumber totalWasteCollected totalRewardsEarned profilePhoto"
       ); // Select only the fields you want to return
 
     res.status(200).json(topUsers);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.get("/leaderboard", async (req, res) => {
+  try {
+    const contributers = await User.find()
+      .sort({ totalWasteCollected: -1 }) // Sort by totalWasteCollected in descending order
+      .select(
+        "name phoneNumber totalWasteCollected totalRewardsEarned profilePhoto"
+      ); // Select only the fields you want to return
+
+    res.status(200).json(contributers);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
