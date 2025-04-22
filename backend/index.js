@@ -8,6 +8,8 @@ const cookieParser = require("cookie-parser");
 const Waste = require("./models/waste.model");
 const { saveDummyData } = require("./models/waste.model");
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 // Connect to the database
@@ -20,12 +22,11 @@ app.get("/", (req, res) => {
   res.send("hello jayesh");
 });
 
-const PORT = process.env.PORT || 3000;
-
 // Middleware
 app.use(
   cors({
-    origin: "https://seisoin.netlify.app",
+    origin: process.env.FRONTEND_URL,
+    credentials: true, // Allow cookies if needed
   })
 );
 app.use(express.json());
