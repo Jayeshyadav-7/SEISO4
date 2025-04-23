@@ -25,10 +25,13 @@ app.get("/", (req, res) => {
 // Middleware
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL, // Allow requests from your frontend URL
     credentials: true, // Allow cookies if needed
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
