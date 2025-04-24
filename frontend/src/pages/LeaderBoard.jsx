@@ -13,7 +13,7 @@ function LeaderBoard() {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BASE_URL}/users/leaderboard`, {
-        // withCredentials: true,
+        withCredentials: true,
       })
 
       .then((response) => {

@@ -65,7 +65,7 @@ function Home() {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BASE_URL}/users/topcontributers`, {
-        withCredentials: false,
+        withCredentials: true,
       })
       .then((response) => {
         setTopContributors(response.data); // Store API response in state
