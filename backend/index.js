@@ -18,23 +18,38 @@ connectToDb();
 // Save dummy data
 // saveDummyData();
 
-app.get("/", (req, res) => {
-  res.send("hello jayesh");
-});
-
 // Middleware
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  // Add other allowed origins if needed
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // Allow requests from your frontend URL
-    credentials: true, // Allow cookies if needed
-    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.get("/", (req, res) => {
+  res.send("hello jayesh");
+});
 
 app.use("/users", userRoute);
 app.use("/waste", wasteRoute);
